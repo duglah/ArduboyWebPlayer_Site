@@ -1,0 +1,42 @@
+<html>
+<body>
+		<canvas height="400" id="c" width="800"></canvas>
+<script async type="text/javascript" src="../js/library.js"></script>
+<script src="../build/helloworld.js"></script>
+<script>
+const width = 128;
+const height = 64;
+
+
+function functionExists(f) {
+	return f && typeof f === "function";
+}
+
+function isNumber(n) {
+	return typeof n === "number";
+}
+
+function testFunctionBinding() {
+	assert(functionExists(Module._setup));
+	assert(functionExists(Module._loop));
+}
+
+// int is part of the interface
+function testNextValReturnsInt() { 
+	//assert(isNumber(new Fib().next()));
+}
+
+function loop() {
+	Module._loop()
+	window.requestAnimationFrame(loop)
+}
+
+Module.onRuntimeInitialized = function() {
+	testFunctionBinding();
+	testNextValReturnsInt();
+	Module._setup()
+	window.requestAnimationFrame(loop)
+}
+</script>
+</body>
+</html>
