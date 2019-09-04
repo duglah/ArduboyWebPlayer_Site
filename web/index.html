@@ -4,21 +4,21 @@
 <script async type="text/javascript" src="../js/library.js"></script>
 <script src="../build/helloworld.js"></script>
 <script>
-const width = 128;
-const height = 64;
+const width = 128
+const height = 64
 
 
 function functionExists(f) {
-	return f && typeof f === "function";
+	return f && typeof f === "function"
 }
 
 function isNumber(n) {
-	return typeof n === "number";
+	return typeof n === "number"
 }
 
 function testFunctionBinding() {
-	assert(functionExists(Module._setup));
-	assert(functionExists(Module._loop));
+	assert(functionExists(Module._setup))
+	assert(functionExists(Module._loop))
 }
 
 // int is part of the interface
@@ -27,15 +27,26 @@ function testNextValReturnsInt() {
 }
 
 function loop() {
-	Module._loop()
+	if(imgData.length == 0) {
+		window.requestAnimationFrame(loop)
+		return
+	}
+
+	const canvas = document.getElementById('c')
+	const ctx = canvas.getContext('2d')
+	ctx.fillStyle = "rgb(255, 255, 255)"
+	ctx.fillRect(0, 0, width, height)
+	const img = new ImageData(imgData, width, height)
+	console.log("render")
+	ctx.putImageData(img, 0, 0)
 	window.requestAnimationFrame(loop)
 }
 
 Module.onRuntimeInitialized = function() {
-	testFunctionBinding();
-	testNextValReturnsInt();
-	Module._setup()
+	testFunctionBinding()
+	testNextValReturnsInt()
 	window.requestAnimationFrame(loop)
+	Module._main()
 }
 </script>
 </body>

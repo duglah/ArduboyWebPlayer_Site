@@ -3,12 +3,13 @@
 
 #include <stdint.h>
 #include <stdio.h>
-
-
 #include <stdlib.h>
+#include <unistd.h>
 #include <emscripten.h>
 #include "avr.h"
 #include "Arduino.h"
+#include "core.h"
+#include "logo.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,21 +27,14 @@ extern "C" {
     extern void jsClear();
 }
 
-#define WIDTH 128
-#define HEIGHT 64
-
-#define INVERT 2 //< lit/unlit pixel
-#define WHITE 1 //< lit pixel
-#define BLACK 0 //< unlit pixel
-
-#define _BV(bit) \
-	(1 << (bit)) 
-
-class Arduboy {
+class Arduboy : public ArduboyCore {
     public:
         Arduboy();
         /// Initializes the hardware
         void begin();
+        void boot();
+        /// Scrolls in the Arduboy logo
+        void bootLogo();
         /// Clears display.
         void clear();
         void setFrameRate(uint8_t rate);

@@ -1,8 +1,6 @@
 #ifndef ARUDINO_H
 #define ARUDINO_H
 
-#include <time.h>
-
 // #ifdef __cplusplus
 // extern "C" {
 // #endif
@@ -11,5 +9,6 @@
 // }
 // #endif
 
+void delay(int milliseconds);
 
 #endif /* ARUDINO_H */

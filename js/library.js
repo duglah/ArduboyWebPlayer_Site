@@ -5,9 +5,9 @@ function makeAlert(text) {
 
 // Other way around from: https://github.com/TEAMarg/arduboy-image-converter
 function transformImageData(buffer, width, height) {
-    var pageCount = Math.ceil(height/ 8);
-    var columnCount = width;
-    var currentByte = 0;
+    var pageCount = Math.ceil(height/ 8)
+    var columnCount = width
+    var currentByte = 0
     var databuffer = []
 
     // Read the sprite page-by-page
@@ -45,6 +45,8 @@ function transformImageData(buffer, width, height) {
     return databuffer
 }
 
+var imgData = []
+
 if (typeof mergeInto !== 'undefined') mergeInto(LibraryManager.library, {
     jsBegin: function() {
         console.log("jsBegin")
@@ -61,15 +63,8 @@ if (typeof mergeInto !== 'undefined') mergeInto(LibraryManager.library, {
     },
     jsDisplay: function (pointer) {
         console.log("jsDisplay")
-        const canvas = document.getElementById('c')
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = "rgb(255, 255, 255)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        const data = new Uint8ClampedArray(Module.HEAP8.buffer, pointer, width * height / 8);
-        const imgData = new Uint8ClampedArray(transformImageData(data, width, height))
-        const img = new ImageData(imgData, width, height);
-        console.log("render")
-        ctx.putImageData(img, 0, 0);
+        const data = new Uint8ClampedArray(Module.HEAP8.buffer, pointer, width * height / 8)
+        imgData = new Uint8ClampedArray(transformImageData(data, width, height))
     },
     jsPrint: function(text) {
         text = UTF8ToString(text, 20);

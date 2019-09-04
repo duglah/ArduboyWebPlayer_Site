@@ -5,3 +5,8 @@
 
 typedef char PROGMEM prog_char;
 typedef unsigned char PROGMEM prog_uchar;
+
+typedef uint8_t boolean;
+
+#define _BV(bit) \
+	(1 << (bit)) 

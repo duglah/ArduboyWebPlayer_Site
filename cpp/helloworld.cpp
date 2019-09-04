@@ -11,18 +11,14 @@ version 2.1 of the License, or (at your option) any later version.
 */
 
 #include "Arduboy.h"
-#include "logo.h"
 
-void delay(int milliseconds)
-{
-    long pause;
-    clock_t now,then;
-
-    pause = milliseconds*(CLOCKS_PER_SEC/1000);
-    now = then = clock();
-    while( (now-then) < pause )
-        now = clock();
+#ifdef __EMSCRIPTEN__
+int main() {
+  setup();
+  emscripten_set_main_loop(loop, 60, 1);
+  return 0;
 }
+#endif
 
 // make an instance of arduboy used for many functions
 Arduboy arduboy;
@@ -36,21 +32,10 @@ void setup() {
   // here we set the framerate to 15, we do not need to run at
   // default 60 and it saves us battery life
   arduboy.setFrameRate(15);
-}
 
-void drawLogo() {
-  // setRGBled(10,0,0);
-  for(int8_t y = -18; y<=24; y++) {
-    //setRGBled(24-y, 0, 0);
-    char c[3];
-    sprintf(c, "%d", y);
-    arduboy.print(&c[0]);
-    arduboy.clear();
-    arduboy.drawBitmap(20,y+18, arduboy_logo, 88, 16, WHITE);
-    arduboy.display();
-    delay(250);
-    
-  }
+  // arduboy.clear();
+  // arduboy.drawBitmap(20,10, arduboy_logo, 88, 16, WHITE);
+  // arduboy.display();
 }
 
 // our main game loop, this runs once every cycle/frame.
@@ -72,6 +57,5 @@ void loop() {
 
   // then we finaly we tell the arduboy to display what we just wrote to the display
   //arduboy.display();
-  drawLogo();
-    
+  arduboy.bootLogo();
 }

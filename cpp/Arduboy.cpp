@@ -9,13 +9,34 @@ void Arduboy::begin()
 //   boot(); // required
 //   bootUtils();
 
-//   bootLogo();
+  bootLogo();
 
 //   // Audio
 //   tunes.initChannel(PIN_SPEAKER_1);
 //   tunes.initChannel(PIN_SPEAKER_2);
 //   audio.begin();
     jsBegin();
+}
+
+void Arduboy::bootLogo()
+{
+  // setRGBled(10,0,0);
+  for(int8_t y = -18; y<=24; y++) {
+    setRGBled(24-y, 0, 0);
+
+    clear();
+    drawBitmap(20,y, arduboy_logo, 88, 16, WHITE);
+    display();
+    delay(27);
+    // longer delay post boot, we put it inside the loop to
+    // save the flash calling clear/delay again outside the loop
+    if (y==-16) {
+      delay(250);
+    }
+  }
+
+  delay(750);
+  setRGBled(0,0,0);
 }
 
 void Arduboy::setFrameRate(uint8_t rate)
