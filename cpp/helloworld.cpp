@@ -32,30 +32,29 @@ void setup() {
   // here we set the framerate to 15, we do not need to run at
   // default 60 and it saves us battery life
   arduboy.setFrameRate(15);
-
-  // arduboy.clear();
-  // arduboy.drawBitmap(20,10, arduboy_logo, 88, 16, WHITE);
-  // arduboy.display();
 }
 
 // our main game loop, this runs once every cycle/frame.
 // this is where our game logic goes.
 void loop() {
-  // pause render until it's time for the next frame
-  if (!(arduboy.nextFrame()))
-    return;
 
-  // first we clear our screen to black
-  //arduboy.clear();
+  arduboy.begin();
+  delay(2000);
 
-  // we set our cursor 5 pixels to the right and 10 down from the top
-  // (positions start at 0, 0) 
-  //arduboy.setCursor(4, 9);
+  // // pause render until it's time for the next frame
+  // // if (!(arduboy.nextFrame()))
+  // //   return;
 
-  // then we print to screen what is in the Quotation marks ""
-  //arduboy.print("Hello, world!");
+  // // first we clear our screen to black
+  // // arduboy.clear();
 
-  // then we finaly we tell the arduboy to display what we just wrote to the display
-  //arduboy.display();
-  arduboy.bootLogo();
+  // // we set our cursor 5 pixels to the right and 10 down from the top
+  // // (positions start at 0, 0) 
+  // arduboy.setCursor(4, 9);
+
+  // // then we print to screen what is in the Quotation marks ""
+  // arduboy.print("Hello, world!");
+
+  // // then we finaly we tell the arduboy to display what we just wrote to the display
+  // arduboy.display();
 }

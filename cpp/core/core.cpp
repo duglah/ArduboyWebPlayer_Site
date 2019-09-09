@@ -22,6 +22,9 @@ void ArduboyCore::safeMode()
 {
 }
 
+void ArduboyCore::boot()
+{
+}
 
 /* Power Management */
 
